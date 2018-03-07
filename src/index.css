@@ -1,9 +1,11 @@
 @import url('https://fonts.googleapis.com/css?family=EB+Garamond|Forum');
+@import url('https://fonts.googleapis.com/css?family=Alice&subset=cyrillic,cyrillic-ext');
 body {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
   background-image: url(assets/images/main_background.png);
+
 }
 a {
   text-decoration: none; 
