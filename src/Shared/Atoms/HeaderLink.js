@@ -1,10 +1,11 @@
 import React, {Component} from 'react'
 import styled from 'styled-components'
+import {fonts} from '../../styles/theme'
 
 const LinkTitle = styled.a.attrs({
     href: '#'
 })`
-    font-size: 2em;
+    font-size: ${fonts.large};
 `
 
 class HeaderLink extends Component {

@@ -1,12 +1,13 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
 
-import { colors } from '../../styles/theme'
+import { colors, fonts } from '../../styles/theme'
 
-const LogoTitle = styled.h1`
+const LogoTitle = styled.div`
     text-decoration: overline underline;
     font-family: 'Forum', cursive;
     color: ${colors.white}
+    font-size: ${fonts.large}
 `
 
 class Logo extends Component {

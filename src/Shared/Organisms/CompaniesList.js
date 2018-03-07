@@ -6,6 +6,7 @@ const List = styled.div`
     display: flex;
     justify-content: space-around;
     margin-top: 2em;
+    flex-wrap: wrap;
 `
 
 class CompanyList extends Component {
