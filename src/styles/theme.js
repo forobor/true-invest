@@ -15,6 +15,8 @@ export const fonts = {
 
 export const pixelFonts = {
     large: '36px',
+    xmed: '30px',
     med: '24px',
-    small: '12px'
+    xsmall: '18px',
+    small: '14px'
 }

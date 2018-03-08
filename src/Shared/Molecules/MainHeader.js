@@ -12,6 +12,7 @@ const Header = styled.div`
     padding: 0.8em;
     background: ${colors.black};
     box-shadow: 0 5px 5px ${colors.black};
+    z-index:1;
 `
 const HeaderTitle = styled.div`
     color: ${colors.white};

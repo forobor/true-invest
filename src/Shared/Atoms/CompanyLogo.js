@@ -3,7 +3,7 @@ import styled from 'styled-components'
 
 const Logo = styled.img`
     width: 60px;
-    heigth: 60px;
+    height: 60px;
 `
 
 class CompanyLogo extends Component {

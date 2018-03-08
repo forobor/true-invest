@@ -7,12 +7,13 @@ const StatFieldContainer = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin:10px;
 `
 const StatTitle = styled.div`
     font-size: ${pixelFonts.small}
 `
 const StatValue = styled.div`
-    fons-size: ${pixelFonts.med}
+    font-size: ${pixelFonts.med}
 `
 
 class CompanyStatField extends Component {
