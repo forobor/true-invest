@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
 import FontAwesome from 'react-fontawesome'
+import { Link } from 'react-router-dom';
 
 import CompanyStatsList from '../Shared/Organisms/CompanyStatsList'
 import { COMPANIES } from '../companies'
@@ -13,9 +14,13 @@ const InfoPage=styled.div`
     flex-direction: column;
     padding-top: 10px;
 `
-const ClosePage = styled(FontAwesome)`
+
+const CloseContainer = styled(Link)`
     position: absolute;
     right: 10px;
+`
+
+const ClosePage = styled(FontAwesome)`
     font-size: ${fonts.large};
     cursor: pointer;
     color: ${colors.black};
@@ -26,10 +31,15 @@ const ClosePage = styled(FontAwesome)`
 
 class CompanyInfoPage extends Component {
     render() {
+        const company = COMPANIES.find(company => +company.id === +this.props.match.params.id);
+        console.log('company',company)
         return (
             <InfoPage>
-                <CompanyStatsList {...COMPANIES[0]} />
-                <ClosePage name='times'/>                                
+                <CloseContainer to={`/`}>
+                    <ClosePage name='times'/>   
+                </CloseContainer>     
+                <CompanyStatsList {...company} />
+                                        
             </InfoPage>
         )
     }

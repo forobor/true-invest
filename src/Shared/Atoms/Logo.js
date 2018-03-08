@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
 
+import { Link } from 'react-router-dom'
 import { colors, fonts } from '../../styles/theme'
 
 const LogoTitle = styled.div`
@@ -13,7 +14,9 @@ const LogoTitle = styled.div`
 class Logo extends Component {
     render() {
         return (
-            <LogoTitle>True Invest</LogoTitle>
+            <Link to={`/`}>
+                <LogoTitle>True Invest</LogoTitle>
+            </Link>
         )
     }
 }

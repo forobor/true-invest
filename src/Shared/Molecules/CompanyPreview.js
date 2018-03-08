@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import CompanyButton from '../Atoms/CompanyButton'
 import CompanyLogo from '../Atoms/CompanyLogo'
 
+import { Link } from 'react-router-dom';
 import { colors } from '../../styles/theme'
 
 const Company=styled.div`
@@ -38,7 +39,10 @@ class CompanyPreview extends Component {
                 <Name>{this.props.name}</Name>
                 <Weight>Вес в индексе RTS: {this.props.weight}</Weight>            
                 <Price>Цена за акцию: {this.props.price} р.</Price>
-                <CompanyButton/>
+                <Link to={`/company/${this.props.id}`}>
+                    <CompanyButton/>
+                </Link>
+                
             </Company>
         )
     }
