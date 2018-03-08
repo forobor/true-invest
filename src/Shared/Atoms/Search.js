@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
 import FontAwesome from 'react-fontawesome'
-import { colors, fonts } from '../../styles/theme'
+import { colors } from '../../styles/theme'
 
 const SearchForm = styled.form`
     display: flex;
@@ -17,7 +17,6 @@ const SearchField = styled.input`
     height: 54px;
     background: transparent;    
     padding: 10px;
-    font-size: ${fonts.med};
     color: ${colors.white}
     font-style:italic;
     box-sizing: border-box;

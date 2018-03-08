@@ -15,7 +15,7 @@ const Button = styled.button`
 
 class CompanyButton extends Component {
     render() {
-        return(<Button onClick={() => this.props.handleClick()}>Посмотреть статистику</Button>)
+        return <Button onClick={() => this.props.handleClick()}>Посмотреть статистику</Button>
     }
 }
 

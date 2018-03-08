@@ -8,7 +8,13 @@ export const colors = {
 }
 
 export const fonts = {
-    large: '3vh',
-    med: '16px',
+    large: '3vmax',
+    med: '1vmax',
+    small: '0.5vmax'
+}
+
+export const pixelFonts = {
+    large: '36px',
+    med: '24px',
     small: '12px'
 }

@@ -1,6 +1,8 @@
 import React, {Component} from 'react'
 import styled from 'styled-components'
 import CompanyButton from '../Atoms/CompanyButton'
+import CompanyLogo from '../Atoms/CompanyLogo'
+
 import { colors } from '../../styles/theme'
 
 const Company=styled.div`
@@ -22,10 +24,7 @@ const Weight = styled.div`
     color: ${colors.gray}
     
 `
-const Logo = styled.img`
-    width: 60px;
-    heigth: 60px;
-`
+
 const Price = styled.div`
     margin: 4px;
 `
@@ -34,7 +33,8 @@ class CompanyPreview extends Component {
     render() {
         return(
             <Company>
-                <Logo src='https://sberbank.ru/portalserver/content/atom/contentRepository/content?id=8655dfea-3d64-4f01-8bf3-26748db9d36e'></Logo>
+                <CompanyLogo 
+                    logo='https://sberbank.ru/portalserver/content/atom/contentRepository/content?id=8655dfea-3d64-4f01-8bf3-26748db9d36e' />
                 <Name>{this.props.name}</Name>
                 <Weight>Вес в индексе RTS: {this.props.weight}</Weight>            
                 <Price>Цена за акцию: {this.props.price} р.</Price>
