@@ -32,7 +32,7 @@ class CompanyStatsList extends Component {
                 </StatColumn>
                 <StatColumn>
                     <CompanyStatField title='Цена за акцию' value={this.props.price} />
-                    <CompanyStatField title='Дивиденды' value={this.props.yearStat.dividend[2016]} />                    
+                    <CompanyStatField title='Дивиденды' value='mock!' />                    
                 </StatColumn>
                 <StatColumn>
                     <CompanyStatField title='P/B' value={this.props.pB.value} />

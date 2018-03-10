@@ -8,7 +8,7 @@ const SearchForm = styled.form`
     background:  ${colors.blue_trans};
     border-radius: 5px;
     max-width: 15em;
-    margin : 20px 1em 20px auto;
+    margin : 8px 0 20px auto;
 `
 
 const SearchField = styled.input`

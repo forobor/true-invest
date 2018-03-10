@@ -16,7 +16,7 @@ const Button = styled.button`
 
 class CompanyButton extends Component {
     render() {
-        return <Button>Посмотреть статистику</Button>
+        return <Button>{this.props.title}</Button>
     }
 }
 

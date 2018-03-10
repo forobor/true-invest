@@ -24,14 +24,17 @@ const HeaderTitle = styled.div`
 class MainHeader extends Component {
     render() {
         return (
-            <Header>
-                <Logo/>
-                <div>
-                    <HeaderTitle>Инвестируйте,</HeaderTitle>
-                    <HeaderTitle>основываясь на данных</HeaderTitle>
-                </div>                
-                <HeaderLink/>
-            </Header>
+            <div>
+                <Header>
+                    <Logo/>
+                    <div>
+                        <HeaderTitle>Инвестируйте,</HeaderTitle>
+                        <HeaderTitle>основываясь на данных</HeaderTitle>
+                    </div>                
+                    <HeaderLink/>
+                </Header>
+            </div>
+
         )
     }
 }
