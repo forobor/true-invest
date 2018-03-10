@@ -21,7 +21,7 @@ class CompanyStatsList extends Component {
                 <CompanyStatField title='Всего акций(млн.)' value={this.props.allStocks} />
                 <CompanyStatField title='free-float' value={this.props.freeFloat} />                    
                 <CompanyStatField title='Цена за акцию' value={this.props.price} />
-                <CompanyStatField title='Дивиденды' value='mock!' />                    
+                <CompanyStatField title='Дивиденды' value={this.props.dividend} />                    
                 <CompanyStatField title='P/B' value={this.props.pB.value} />
                 <CompanyStatField title='P/S' value={this.props.pS.value} />                    
                 <CompanyStatField title='P/CF' value={this.props.pCF.value} />
