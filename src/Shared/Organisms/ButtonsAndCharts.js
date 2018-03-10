@@ -6,7 +6,8 @@ import { colors } from '../../styles/theme'
 const StatButtons = styled.div`
     display: flex;
     justify-content: center;
-    margin: 10px;
+    margin-left: 1em;
+    margin-right: 1em;    
     flex-wrap: wrap;
 `
 const StatButton = styled.button`
