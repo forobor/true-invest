@@ -40,7 +40,7 @@ class CompanyPreview extends Component {
                 <Weight>Вес в индексе RTS: {this.props.weight}</Weight>            
                 <Price>Цена за акцию: {this.props.price} р.</Price>
                 <Link to={`/company/${this.props.id}`}>
-                    <CompanyButton/>
+                    <CompanyButton />
                 </Link>
                 
             </Company>

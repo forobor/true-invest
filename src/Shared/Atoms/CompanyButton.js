@@ -10,7 +10,8 @@ const Button = styled.button`
   border-radius: 3px;
   border: 2px solid ${colors.blue};
   font-family: 'Alice', serif; 
-  margin: 5px;  
+  margin: 5px;
+  cursor: pointer; 
 `;
 
 class CompanyButton extends Component {
