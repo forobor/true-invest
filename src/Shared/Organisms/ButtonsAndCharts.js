@@ -2,33 +2,50 @@ import React, {Component} from 'react'
 import styled from 'styled-components'
 
 import Chart from '../Molecules/Chart'
-import { colors } from '../../styles/theme'
+import { colors, media, pixelFonts } from '../../styles/theme'
 
 const Container = styled.div`
-    background: 'white';
+    display:flex;
+    flex-direction: column;
+    background: ${colors.white};
+
 `
 
 const StatButtons = styled.div`
     display: flex;
     justify-content: center;
-    margin-left: 1em;
-    margin-right: 1em;    
+    margin-left: 20px;
+    margin-right: 20px;    
     flex-wrap: wrap;
-    
 `
 const StatButton = styled.button`
     background: ${colors.blue}};
     color: ${colors.white};
-    font-size: 1em;
-    padding: 0.25em 1em;
     border-radius: 3px;
+    font-size: ${pixelFonts.xsmall};
+    padding: 0.25em 1em;
     border: 2px solid ${colors.blue};
     margin: 5px;
     cursor: pointer;
-    font-family: 'Alice', serif;         
+    font-family: 'Alice', serif; 
+    width: 150px;
+    text-align: center;
+    ${media.tablet`
+        width: 150px;        
+    `}
+    ${media.phone`
+    font-size: ${pixelFonts.small};
+        width: 125px;
+    `}   
 `
 
-const ChartTitle = styled.h1`
+const ChartContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    background: ${colors.white};
+`
+
+const ChartTitle = styled.h2`
     text-align: center;
 `
 
@@ -48,22 +65,21 @@ class ButtonsAndCharts extends Component {
         const {stats} = this.props;
         return (
             <Container>
-                <div>
-                    <StatButtons>
-                        {stats.map(statField =>                     
-                            <StatButton
-                                key={statField.name}
-                                name={statField.name}
-                                data={statField.data} 
-                                onClick={event => this.handleStatButtonClick(event.target)}>
-                                {statField.title}
-                            </StatButton>)
-                        }
-                    </StatButtons>
-                </div>
-                <ChartTitle>{this.state.currentChart.title}</ChartTitle>
-                <Chart legend={this.state.currentChart.title} {...this.state.currentChart.chartData} />
-                
+                <StatButtons>
+                    {stats.map(statField =>                     
+                        <StatButton
+                            key={statField.name}
+                            name={statField.name}
+                            data={statField.data} 
+                            onClick={event => this.handleStatButtonClick(event.target)}>
+                            {statField.title}
+                        </StatButton>)
+                    }
+                </StatButtons>
+                <ChartContainer>
+                    <ChartTitle>{this.state.currentChart.title}</ChartTitle>
+                    <Chart legend={this.state.currentChart.title} {...this.state.currentChart.chartData} />
+                </ChartContainer> 
             </Container>
         )
     }

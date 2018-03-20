@@ -1,3 +1,5 @@
+import { css } from 'styled-components'
+
 export const colors = {
     black: '#000000',
     white: '#ffffff',
@@ -17,6 +19,24 @@ export const pixelFonts = {
     large: '36px',
     xmed: '30px',
     med: '24px',
-    xsmall: '18px',
+    normal: '18px',
+    xsmall: '16px',    
     small: '14px'
 }
+
+const sizes = {
+    desktop: 1063,
+    tablet: 1024,
+    phone: 414
+  }
+  
+  // Iterate through the sizes and create a media template
+export const media = Object.keys(sizes).reduce((acc, label) => {
+    acc[label] = (...args) => css`
+      @media (max-width: ${sizes[label] / 16}em) {
+        ${css(...args)}
+      }
+    `
+  
+    return acc
+  }, {})
