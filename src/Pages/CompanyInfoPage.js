@@ -14,6 +14,7 @@ const InfoPage=styled.div`
     flex:1;
     flex-direction: column;
     padding-top: 10px;
+    font-family: 'Alice', serif;     
 `
 
 const CloseContainer = styled(Link)`
@@ -37,8 +38,10 @@ class CompanyInfoPage extends Component {
             <InfoPage>
                 <CloseContainer to={`/`}>
                     <ClosePage name='times'/>   
-                </CloseContainer>     
-                <CompanyStatsList {...company} />
+                </CloseContainer>
+                <div>
+                    <CompanyStatsList {...company} />
+                </div>    
                 <ButtonsAndCharts stats={company.chartStats}/>                     
             </InfoPage>
         )
