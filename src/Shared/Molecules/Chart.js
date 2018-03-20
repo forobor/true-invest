@@ -2,25 +2,25 @@ import React, { Component } from 'react'
 import { Line } from 'react-chartjs-2'
 import styled from 'styled-components'
 
-import {colors} from '../../styles/theme'
+import { colors, media } from '../../styles/theme'
 
 const ChartContainer = styled.div`
-    margin: 20px auto;
-    max-width: 1000px;
-    max-height: 1000px;
-    
+    margin: 0 auto;
+    width: 90% !important;
+    max-width: 800px;
+    height: auto !important;
+    background: ${colors.white}
+
 `
 class Chart extends Component {
 
     render() {
-        console.log('thisprops', this.props)
         return (
             <ChartContainer>
                 <Line
                     data={{labels: [...this.props.labels],
                         datasets:[
                             {
-                                label: this.props.legend,
                                 borderColor: colors.blue,
                                 fill: false,
                                 data:[...this.props.data]
@@ -28,7 +28,12 @@ class Chart extends Component {
                         ]}}
                     options={{
                         legend: { display: false },
-                        maintainAspectRatio: true
+                        maintainAspectRatio: true,
+                        scales: {
+                            yAxes: [{
+                                position: 'right'
+                            }]
+                        },
                     }}
                 />
             </ChartContainer>

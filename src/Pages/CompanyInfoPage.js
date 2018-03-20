@@ -9,10 +9,8 @@ import { COMPANIES } from '../companies'
 import {colors, fonts} from '../styles/theme'
 
 const InfoPage=styled.div`
-    display: flex;
+    height: 100%;
     background: ${colors.white};
-    flex:1;
-    flex-direction: column;
     padding-top: 10px;
     font-family: 'Alice', serif;     
 `
@@ -38,11 +36,9 @@ class CompanyInfoPage extends Component {
             <InfoPage>
                 <CloseContainer to={`/`}>
                     <ClosePage name='times'/>   
-                </CloseContainer>
-                <div>
-                    <CompanyStatsList {...company} />
-                </div>    
-                <ButtonsAndCharts stats={company.chartStats}/>                     
+                </CloseContainer>              
+                <CompanyStatsList {...company} />
+                <ButtonsAndCharts stats={company.chartStats}/>                    
             </InfoPage>
         )
     }
