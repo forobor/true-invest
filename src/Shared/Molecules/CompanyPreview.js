@@ -36,7 +36,7 @@ class CompanyPreview extends Component {
             <div>
                 <Company>
                     <CompanyLogo 
-                        logo='https://sberbank.ru/portalserver/content/atom/contentRepository/content?id=8655dfea-3d64-4f01-8bf3-26748db9d36e' />
+                        logo={this.props.logo} />
                     <Name>{this.props.name}</Name>
                     <Weight>Вес в индексе RTS: {this.props.weight}%</Weight>            
                     <Price>Цена за акцию: {this.props.price} р.</Price>
