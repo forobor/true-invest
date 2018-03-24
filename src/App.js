@@ -18,7 +18,7 @@ class App extends Component {
   render() {
     return (
       <AppWrapper>
-        <MainHeader/>
+        <MainHeader />
         <Switch>
           <Route exact path='/' component={MainPage}/>
           <Route path='/company/:id' component={CompanyInfoPage}/>
