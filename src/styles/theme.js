@@ -10,17 +10,11 @@ export const colors = {
 }
 
 export const fonts = {
-    large: '3vmax',
-    med: '1vmax',
-    small: '0.5vmax'
-}
-
-export const pixelFonts = {
     large: '36px',
     xmed: '30px',
     med: '24px',
     normal: '18px',
-    xsmall: '16px',    
+    xsmall: '16px',
     small: '14px'
 }
 

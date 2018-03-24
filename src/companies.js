@@ -3,7 +3,7 @@ export const COMPANIES = [
   {
     "id": 1,
     "name": "ПАО Сбербанк ао",
-    "logo": "../../assets/images/companiesLogos/sber.png",
+    "logo": "https://www.sberbank.ru/portalserver/content/atom/contentRepository/content?id=8655dfea-3d64-4f01-8bf3-26748db9d36e",
     "weight": 15.27,
     "price": 268.34,
     "infoPageData": [
@@ -250,7 +250,7 @@ export const COMPANIES = [
     "id":2,
     "name":"ПАО 'Газпром'",
     "ticker":"GAZP",
-    "logo":"./assets/images/companiesLogos/gazprom.svg",
+    "logo":"https://www.geopoliticalmonitor.com/wp-content/uploads/2016/07/Gazlogo.jpg",
     "weight": 15.13,
     "price": 142.45,
     "allStocks":"23 673",

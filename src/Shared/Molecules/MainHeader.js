@@ -1,41 +1,63 @@
-import React, { Component } from 'react';
-import styled from 'styled-components'
+import React, { Component } from "react";
+import styled from "styled-components";
+import { Link } from "react-router-dom";
 
-import {colors, fonts} from '../../styles/theme'
-import Logo from '../Atoms/Logo'
-import HeaderLink from '../Atoms/HeaderLink'
+import {
+  colors,
+  fonts,
+  media
+} from "../../styles/theme";
 
 const Header = styled.div`
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0.8em;
-    background: ${colors.black};
-    box-shadow: 0 5px 5px ${colors.black};
-`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  background: ${colors.black};
+  font-size: ${fonts.large};
+  height: 80px;
+  ${media.tablet`
+        font-size: ${fonts.xmed};
+    `};
+  ${media.phone`
+        padding: 5px;
+        font-size: ${fonts.normal};
+    `};
+`;
+
+const LogoTitle = styled.div`
+  text-decoration: overline underline;
+  font-family: "Forum", cursive;
+  color: ${colors.white};
+`;
+
 const HeaderTitle = styled.div`
-    color: ${colors.white};
-    text-align: center;
-    font-family: 'Alice', serif;
-    font-size: ${fonts.large}  
-`
+  color: ${colors.white};
+  text-align: center;
+  font-family: "Alice", serif;
+`;
+
+const LinkTitle = styled.div``;
 
 class MainHeader extends Component {
-    render() {
-        return (
-            <div style={{zIndex: 1}}>
-                <Header>
-                    <Logo/>
-                    <div>
-                        <HeaderTitle>Инвестируйте,</HeaderTitle>
-                        <HeaderTitle>основываясь на данных</HeaderTitle>
-                    </div>                
-                    <HeaderLink/>
-                </Header>
-            </div>
-
-        )
-    }
+  render() {
+    return (
+      <Header>
+        <Link to={`/`}>
+          <LogoTitle>True Invest</LogoTitle>
+        </Link>
+        <div>
+          <HeaderTitle>Инвестируйте,</HeaderTitle>
+          <HeaderTitle>
+            основываясь на данных
+          </HeaderTitle>
+        </div>
+        <Link to={`/`}>
+          <LinkTitle>О сайте</LinkTitle>
+        </Link>
+      </Header>
+    );
+  }
 }
 
-export default MainHeader
+export default MainHeader;
