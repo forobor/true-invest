@@ -41,11 +41,7 @@ const StatButton = styled.button`
     `};
 `;
 
-const ChartContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  background: ${colors.white};
-`;
+const ChartContainer = styled.div``;
 
 const ChartTitle = styled.h2`
   text-align: center;

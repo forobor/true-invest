@@ -42,20 +42,24 @@ const LinkTitle = styled.div``;
 class MainHeader extends Component {
   render() {
     return (
-      <Header>
-        <Link to={`/`}>
-          <LogoTitle>True Invest</LogoTitle>
-        </Link>
-        <div>
-          <HeaderTitle>Инвестируйте,</HeaderTitle>
-          <HeaderTitle>
-            основываясь на данных
-          </HeaderTitle>
-        </div>
-        <Link to={`/`}>
-          <LinkTitle>О сайте</LinkTitle>
-        </Link>
-      </Header>
+      <div>
+        <Header>
+          <Link to={`/`}>
+            <LogoTitle>True Invest</LogoTitle>
+          </Link>
+          <div>
+            <HeaderTitle>
+              Инвестируйте,
+            </HeaderTitle>
+            <HeaderTitle>
+              основываясь на данных
+            </HeaderTitle>
+          </div>
+          <Link to={`/`}>
+            <LinkTitle>О сайте</LinkTitle>
+          </Link>
+        </Header>
+      </div>
     );
   }
 }

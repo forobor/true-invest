@@ -14,6 +14,7 @@ const InfoPage = styled.div`
   background: ${colors.white};
   padding-top: 10px;
   font-family: "Alice", serif;
+  position: relative;
 `;
 
 const CloseContainer = styled(Link)`
@@ -38,7 +39,7 @@ const ClosePage = styled(FontAwesome)`
   }
 `;
 
-const CompanyName = styled.h1``;
+const CompanyName = styled.h2``;
 
 class CompanyInfoPage extends Component {
   render() {
