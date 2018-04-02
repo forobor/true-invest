@@ -3,10 +3,13 @@
   "version": "1.0.0",
   "description": "API for true-invest app",
   "main": "index.js",
+  "homepage": "http://forobor.github.io/true-invest",
   "scripts": {
     "client": "cd client && yarn start",
     "server": "nodemon server.js",
-    "dev": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\""
+    "dev": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\"",
+    "predeploy": "npm run build",
+  "deploy": "gh-pages -d build"
   },
   "author": "forobor",
   "license": "ISC",
