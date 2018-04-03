@@ -2,6 +2,7 @@ import { css } from 'styled-components'
 
 export const colors = {
     black: '#000000',
+    danger: '#9B1D1E',
     white: '#ffffff',
     blue: '#005DCC',
     gray: '#b7b7b7',
@@ -10,6 +11,7 @@ export const colors = {
 }
 
 export const fonts = {
+    giant: '72px',
     large: '36px',
     xmed: '30px',
     med: '24px',

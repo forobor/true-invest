@@ -32,17 +32,29 @@ const Price = styled.div`
 
 class CompanyPreview extends Component {
     render() {
+        const {logo, name, weight, price, isEditable,id, onDelete } = this.props
         return(
             <div>
                 <Company>
                     <CompanyLogo 
-                        logo={this.props.logo} />
-                    <Name>{this.props.name}</Name>
-                    <Weight>Вес в индексе RTS: {this.props.weight}%</Weight>            
-                    <Price>Цена за акцию: {this.props.price} р.</Price>
-                    <Link to={`/company/${this.props.id}`}>
-                        <CompanyButton title='Посмотреть статистику' />
-                    </Link> 
+                        logo={logo} />
+                    <Name>{name}</Name>
+                    <Weight>Вес в индексе RTS: {weight}%</Weight>            
+                    <Price>Цена за акцию: {price} р.</Price>
+                    {isEditable ? (
+                        <div>
+                            <Link to={`/company/${id}`}>
+                                <CompanyButton isChange title='Изменить' />
+                            </Link> 
+                            <CompanyButton isDelete title='Удалить' onDelete={() => onDelete(id)}/>
+                        </div>
+
+                    ) : (
+                        <Link to={`/company/${id}`}>
+                            <CompanyButton title='Посмотреть статистику' />
+                        </Link> 
+                    )}
+
                 </Company>
             </div>
 

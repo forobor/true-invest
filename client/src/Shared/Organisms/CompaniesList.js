@@ -10,7 +10,7 @@ const List = styled.div`
 
 class CompanyList extends Component {
     render() {
-        const {companies} = this.props
+        const {companies, isEditable, onDelete} = this.props
         return (
             <div>
                 <List>
@@ -22,6 +22,8 @@ class CompanyList extends Component {
                                 logo={company.logo}
                                 weight={company.weight}
                                 price={company.price}
+                                isEditable={isEditable}
+                                onDelete={onDelete}
                             />                        
                         )
                     }
