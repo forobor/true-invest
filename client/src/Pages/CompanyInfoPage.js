@@ -55,7 +55,8 @@ class CompanyInfoPage extends Component {
   }
 
   callApi = async () => {
-    const companyId = +this.props.match.params.id;
+    //this.props.match.params.id;
+    const companyId = +this.props.location.state.id;
     const response = await fetch(`/api/company/${companyId}`);
     const body = await response.json();
 
@@ -64,7 +65,6 @@ class CompanyInfoPage extends Component {
   };
 
   render() {
-
     const {company} = this.state
     if (this.state.company) {
       return (

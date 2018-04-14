@@ -19,6 +19,7 @@ class CompanyList extends Component {
                                 key={company.id}
                                 id={company.id}
                                 name={company.name}
+                                ticker={company.ticker}
                                 logo={company.logo}
                                 weight={company.weight}
                                 price={company.price}

@@ -16,20 +16,14 @@ const AppWrapper = styled.div`
 `
 
 class App extends Component {
-
-
-
-
-
   render() {
     return (
       <AppWrapper>
         <MainHeader />
         <Switch>
           <Route exact path='/' component={MainPage}/>
-          <Route path='/company/:id' component={CompanyInfoPage}/>
-          <Route path='/dashboard' component={Dashboard}/>
-          
+          <Route path='/company/:ticker' component={CompanyInfoPage}/>
+          <Route path='/dashboard' component={Dashboard}/> 
         </Switch>
       </AppWrapper>
     );

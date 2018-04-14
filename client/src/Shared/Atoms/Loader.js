@@ -11,7 +11,7 @@ const LoaderContainer = styled.div`
 `
 
 const StyledLoader = styled.div`
-    border: 16px solid ${colors.blue_trans};
+    border: 16px solid ${colors.white_trans};
     border-radius: 50%;
     border-top: 16px solid ${colors.blue};
     width: 80px;

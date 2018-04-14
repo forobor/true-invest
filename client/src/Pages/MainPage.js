@@ -1,5 +1,7 @@
 import React, { Component } from "react";
+import { connect } from 'react-redux';
 
+import { fetchCompaniesPreview } from '../redux/reducers/companies_preview';
 import Loader from '../Shared/Atoms/Loader'
 import CompaniesList from "../Shared/Organisms/CompaniesList";
 import Search from "../Shared/Atoms/Search";
@@ -7,30 +9,22 @@ import Search from "../Shared/Atoms/Search";
 class MainPage extends Component {
 
   state = {
-    companies: null,
-    searchedCompanies: null
+    searchedCompanies: this.props.companies
   };
 
   componentDidMount() {
-    if (!this.state.companies) {
-      this.callApi()
-      .then(res => this.setState({ companies: res, searchedCompanies: res }))
-      .catch(err => console.log(err));
-    }
-
+    this.props.fetchCompaniesPreview();
   }
 
-  callApi = async () => {
-    const response = await fetch('/api/companies');
-    const body = await response.json();
-
-    if (response.status !== 200) throw Error(body.message);
-    return body;
-  };
+  componentWillReceiveProps(props){
+    if(props.companies){
+      this.setState({searchedCompanies: props.companies})
+    }
+  }
 
   handleSearch = value => {
     this.setState({
-      searchedCompanies: this.state.companies.filter(
+      searchedCompanies: this.props.companies.filter(
         el =>
           el.name.toLowerCase().indexOf(value) !==
           -1
@@ -39,18 +33,37 @@ class MainPage extends Component {
   };
 
   render() {
-    if( this.state.companies) {
+    const { isLoading, error, companies } = this.props;
+    const { searchedCompanies } = this.state
+    console.log('props', companies, this.state.searchedCompanies )
+    if(isLoading) 
+      return <Loader />;
+    if (error) 
+      return <div>Error: {this.props.error}</div>
+    if(companies) {
       return (
         <div>
           <Search onChange={this.handleSearch} />
-          <CompaniesList
-            companies={this.state.searchedCompanies}
-          />
+          { searchedCompanies && 
+            <CompaniesList
+              companies={searchedCompanies}
+            />
+          }
+
         </div>
       );
-    }
-    return <Loader />;
+    } 
+    return null       
   }
 }
 
-export default MainPage;
+const mapStateToProps = (state) => {
+  console.log('stte', state.companies.companies)
+  return({
+    isLoading: state.companies.isLoading,
+    companies: state.companies.companies,
+    error: state.companies.error 
+  })
+};
+
+export default connect(mapStateToProps, { fetchCompaniesPreview })(MainPage);
