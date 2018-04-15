@@ -35,11 +35,10 @@ class MainPage extends Component {
   render() {
     const { isLoading, error, companies } = this.props;
     const { searchedCompanies } = this.state
-    console.log('props', companies, this.state.searchedCompanies )
     if(isLoading) 
       return <Loader />;
     if (error) 
-      return <div>Error: {this.props.error}</div>
+      return <div>Error: {error}</div>
     if(companies) {
       return (
         <div>
@@ -57,13 +56,10 @@ class MainPage extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  console.log('stte', state.companies.companies)
-  return({
+const mapStateToProps = (state) => ({
     isLoading: state.companies.isLoading,
     companies: state.companies.companies,
     error: state.companies.error 
-  })
-};
+})
 
 export default connect(mapStateToProps, { fetchCompaniesPreview })(MainPage);

@@ -23,24 +23,33 @@ const companyInfoFail = error => ({
 
 const initialState = {
     isLoading: false,
-    company: {},
+    company: null,
     error: null
 }
 
-const companyInfoReducer = (state = initialState, action) => {
+export default (state = initialState, action) => {
     switch (action.type) {
         case COMPANY_INFO_LOADING:
-            return action.isLoading;
+            return {
+                ...state,
+                isLoading: action.isLoading
+            }
         case COMPANY_INFO_SUCCESS:
-            return action.company;
+            return {
+                ...state,
+                company: action.company
+            }
         case COMPANY_INFO_FAIL:
-            return action.error;    
+            return {
+                ...state,
+                error: action.error
+            }  
         default:
             return state;
     }
 }
 
-export const fetchCompanyInfo = id => dispatch => {
+export const fetchCurrentCompanyInfo = id => dispatch => {
     dispatch(companyInfoLoading(true))
     fetch(`${COMPANY_INFO_API}${id}`)
         .then(response => {
@@ -53,4 +62,3 @@ export const fetchCompanyInfo = id => dispatch => {
         .catch(error => dispatch(companyInfoFail(error)));
 }
 
-export default companyInfoReducer;

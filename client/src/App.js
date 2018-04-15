@@ -22,7 +22,7 @@ class App extends Component {
         <MainHeader />
         <Switch>
           <Route exact path='/' component={MainPage}/>
-          <Route path='/company/:ticker' component={CompanyInfoPage}/>
+          <Route path='/company/:id' component={CompanyInfoPage}/>
           <Route path='/dashboard' component={Dashboard}/> 
         </Switch>
       </AppWrapper>

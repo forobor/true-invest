@@ -15,7 +15,6 @@ const StatsList = styled.div`
 
 class CompanyStatsList extends Component {
     render () {
-        console.log('props', this.props)
         const { infoPageData } = this.props
         return (
             <StatsList>           

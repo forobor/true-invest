@@ -50,7 +50,7 @@ class CompanyPreview extends Component {
                         </div>
 
                     ) : (
-                        <Link to={{pathname: `/company/${ticker}`, state: {id: id}}}>
+                        <Link to={`/company/${id}`}>
                             <CompanyButton title='Посмотреть статистику' />
                         </Link> 
                     )}

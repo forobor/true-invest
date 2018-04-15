@@ -2,7 +2,9 @@ import React, { Component } from "react";
 import styled from "styled-components";
 import FontAwesome from "react-fontawesome";
 import { Link } from "react-router-dom";
+import { connect } from 'react-redux';
 
+import { fetchCurrentCompanyInfo } from '../redux/reducers/current_company_info'
 import Loader from '../Shared/Atoms/Loader'
 import CompanyLogo from "../Shared/Atoms/CompanyLogo";
 import CompanyStatsList from "../Shared/Organisms/CompanyStatsList";
@@ -42,31 +44,19 @@ const ClosePage = styled(FontAwesome)`
 const CompanyName = styled.h2``;
 
 class CompanyInfoPage extends Component {
-  state = {
-    company: null,
-  };
 
   componentDidMount() {
-    if (!this.state.company) {
-      this.callApi()
-      .then(res => this.setState({ company: {...res} }))
-      .catch(err => console.log(err));
-    }
+    const companyTicker = +this.props.match.params.id;
+    this.props.fetchCurrentCompanyInfo(companyTicker)
   }
 
-  callApi = async () => {
-    //this.props.match.params.id;
-    const companyId = +this.props.location.state.id;
-    const response = await fetch(`/api/company/${companyId}`);
-    const body = await response.json();
-
-    if (response.status !== 200) throw Error(body.message);
-    return body;
-  };
-
   render() {
-    const {company} = this.state
-    if (this.state.company) {
+    const { isLoading, error, company} = this.props
+    if(isLoading) 
+      return <Loader />;
+    if (error) 
+      return <div>Error: {error}</div>
+    if (company) {
       return (
         <InfoPage>
           <CloseContainer to={`/`}>
@@ -85,8 +75,15 @@ class CompanyInfoPage extends Component {
         </InfoPage>
       );
     }
-    return <Loader/>;
+    return null;
   }
 }
 
-export default CompanyInfoPage;
+const mapStateToProps = (state) => ({
+    isLoading: state.currentCompany.isLoading,
+    company: state.currentCompany.company,
+    error: state.currentCompany.error 
+})
+
+
+export default connect(mapStateToProps, { fetchCurrentCompanyInfo })(CompanyInfoPage);
