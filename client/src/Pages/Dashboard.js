@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import styled from 'styled-components'
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 
+import { fetchCompaniesPreview } from '../redux/reducers/companies_preview';
 import Loader from '../Shared/Atoms/Loader'
 import CompaniesList from "../Shared/Organisms/CompaniesList";
 import Search from "../Shared/Atoms/Search";
@@ -35,29 +37,21 @@ const AddButton = styled.div`
     `};
 `
 
-class MainPage extends Component {
+class Dashboard extends Component {
 
   state = {
-    companies: null,
-    searchedCompanies: null
+    searchedCompanies: this.props.companies
   };
 
   componentDidMount() {
-    if (!this.state.companies) {
-      this.callApi()
-      .then(res => this.setState({ companies: res, searchedCompanies: res }))
-      .catch(err => console.log(err));
-    }
-
+    this.props.fetchCompaniesPreview();
   }
 
-  callApi = async () => {
-    const response = await fetch('/api/companies');
-    const body = await response.json();
-
-    if (response.status !== 200) throw Error(body.message);
-    return body;
-  };
+  componentWillReceiveProps(props){
+    if(props.companies){
+      this.setState({searchedCompanies: props.companies})
+    }
+  }
 
   handleSearch = value => {
     this.setState({
@@ -86,14 +80,20 @@ class MainPage extends Component {
   }
 
   render() {
-    if( this.state.companies) {
+    const { isLoading, error, companies } = this.props;
+    const { searchedCompanies } = this.state
+    if(isLoading) 
+      return <Loader />;
+    if (error) 
+      return <div>Error: {error}</div>
+    if(companies) {
       return (
         <div>
           <Search onChange={this.handleSearch} />
           <CompaniesList 
             onDelete={this.handleDelete}
             isEditable
-            companies={this.state.searchedCompanies}
+            companies={searchedCompanies}
           />
           <Link  to=''>
             <AddButton>+</AddButton>
@@ -105,4 +105,10 @@ class MainPage extends Component {
   }
 }
 
-export default MainPage;
+const mapStateToProps = (state) => ({
+  isLoading: state.companies.isLoading,
+  companies: state.companies.companies,
+  error: state.companies.error 
+})
+
+export default connect(mapStateToProps, { fetchCompaniesPreview })(Dashboard);

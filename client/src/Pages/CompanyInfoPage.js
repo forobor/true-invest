@@ -46,8 +46,8 @@ const CompanyName = styled.h2``;
 class CompanyInfoPage extends Component {
 
   componentDidMount() {
-    const companyTicker = +this.props.match.params.id;
-    this.props.fetchCurrentCompanyInfo(companyTicker)
+    const companyId = +this.props.match.params.id;
+    this.props.fetchCurrentCompanyInfo(companyId)
   }
 
   render() {

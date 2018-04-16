@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
 import styled from 'styled-components'
+
+
 import MainHeader from './Shared/Molecules/MainHeader'
 import MainPage from './Pages/MainPage'
 import Dashboard from './Pages/Dashboard'
 import CompanyInfoPage from './Pages/CompanyInfoPage'
+import ChangeCompanyPage from './Pages/ChangeCompanyPage'
 import { Switch,  Route } from 'react-router-dom';
 
 
@@ -23,7 +26,8 @@ class App extends Component {
         <Switch>
           <Route exact path='/' component={MainPage}/>
           <Route path='/company/:id' component={CompanyInfoPage}/>
-          <Route path='/dashboard' component={Dashboard}/> 
+          <Route exact path='/dashboard' component={Dashboard}/>
+          <Route path='/dashboard/company/:id' component={ChangeCompanyPage}/> 
         </Switch>
       </AppWrapper>
     );

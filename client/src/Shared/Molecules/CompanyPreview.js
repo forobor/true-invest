@@ -32,7 +32,7 @@ const Price = styled.div`
 
 class CompanyPreview extends Component {
     render() {
-        const {id, ticker, logo, name, weight, price, isEditable, onDelete } = this.props
+        const {id, logo, name, weight, price, isEditable, onDelete } = this.props
         return(
             <div>
                 <Company>
@@ -43,7 +43,7 @@ class CompanyPreview extends Component {
                     <Price>Цена за акцию: {price} р.</Price>
                     {isEditable ? (
                         <div>
-                            <Link to={{pathname: `/company/${ticker}`, state: {id: id}}}>
+                            <Link to={`/dashboard/company/${id}`}>
                                 <CompanyButton isChange title='Изменить' />
                             </Link> 
                             <CompanyButton isDelete title='Удалить' onDelete={() => onDelete(id)}/>

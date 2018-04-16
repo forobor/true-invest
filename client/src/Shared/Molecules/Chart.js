@@ -44,7 +44,7 @@ class Chart extends Component {
               yAxes: [
                 {
                   position: "right"
-                }
+                }                
               ]
             }
           }}
