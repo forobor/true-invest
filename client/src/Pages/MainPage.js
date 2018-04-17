@@ -9,7 +9,7 @@ import Search from "../Shared/Atoms/Search";
 class MainPage extends Component {
 
   state = {
-    searchedCompanies: this.props.companies
+    searchedCompanies: null
   };
 
   componentDidMount() {
