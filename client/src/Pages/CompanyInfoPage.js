@@ -55,7 +55,7 @@ class CompanyInfoPage extends Component {
     if(isLoading) 
       return <Loader />;
     if (error) 
-      return <div>Error: {error}</div>
+      return <div>Error: {error.message}</div>
     if (company) {
       return (
         <InfoPage>
@@ -68,7 +68,7 @@ class CompanyInfoPage extends Component {
               {company.name}
             </CompanyName>
           </CompanyLogoNameContainer>
-          <CompanyStatsList {...company} />
+          <CompanyStatsList infoPageData={company.infoPageData} />
           <ButtonsAndCharts
             stats={company.chartStats}
           />

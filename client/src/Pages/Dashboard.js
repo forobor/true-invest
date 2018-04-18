@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import { fetchCompaniesPreview } from '../redux/reducers/companies_preview';
+import { fetchCompaniesPreview, deleteCompany } from '../redux/reducers/companies_preview';
 import Loader from '../Shared/Atoms/Loader'
 import CompaniesList from "../Shared/Organisms/CompaniesList";
 import Search from "../Shared/Atoms/Search";
@@ -64,23 +64,12 @@ class Dashboard extends Component {
   };
 
   handleDelete = id => {
-      
-    console.log('del')
-    this.callApiDelete(id)
-    .then(res => this.forceUpdate()) //no work
-    .catch(err => console.log(err));
+      this.props.deleteCompany(id)
   }
 
-  callApiDelete = async id => {
-    const response = await fetch(`/api/company/${id}`, {method: 'DELETE'});
-    const body = await response.json();
-
-    if (response.status !== 200) throw Error(body.message);
-    return body;
-  }
 
   render() {
-    const { isLoading, error, companies } = this.props;
+    const { isLoading, error, companies, isDeleteLoading } = this.props;
     const { searchedCompanies } = this.state
     if(isLoading) 
       return <Loader />;
@@ -90,11 +79,16 @@ class Dashboard extends Component {
       return (
         <div>
           <Search onChange={this.handleSearch} />
-          <CompaniesList 
-            onDelete={this.handleDelete}
-            isEditable
-            companies={searchedCompanies}
-          />
+          {isDeleteLoading 
+            ? <Loader />
+            : <CompaniesList 
+              onDelete={this.handleDelete}
+              isEditable
+              companies={searchedCompanies}
+              isDeleteLoading={isDeleteLoading}
+            />
+          }
+
           <Link  to=''>
             <AddButton>+</AddButton>
           </Link>
@@ -108,7 +102,9 @@ class Dashboard extends Component {
 const mapStateToProps = (state) => ({
   isLoading: state.companies.isLoading,
   companies: state.companies.companies,
-  error: state.companies.error 
+  error: state.companies.error,
+
+  isDeleteLoading: state.companies.isDeleteLoading
 })
 
-export default connect(mapStateToProps, { fetchCompaniesPreview })(Dashboard);
+export default connect(mapStateToProps, { fetchCompaniesPreview, deleteCompany })(Dashboard);

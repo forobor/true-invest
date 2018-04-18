@@ -16,11 +16,17 @@ const StatsList = styled.div`
 class CompanyStatsList extends Component {
     render () {
         const { infoPageData } = this.props
+        const infoKeys = Object.keys(infoPageData)
         return (
             <StatsList>           
                 {
-                    infoPageData.map((statFiled, key) => (
-                        <CompanyStatField key={key} title={statFiled.title} value={statFiled.value} /> 
+
+                    infoKeys.map((statField, key) => (
+                        <CompanyStatField 
+                            key={key} 
+                            title={infoPageData[statField].title} 
+                            value={infoPageData[statField].value} 
+                        /> 
                     ))
                 }
             </StatsList>

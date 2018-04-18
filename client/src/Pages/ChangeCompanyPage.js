@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { connect } from 'react-redux';
 
 import CompanyLogo from '../Shared/Atoms/CompanyLogo'
-import { fetchCurrentCompanyInfo } from '../redux/reducers/current_company_info'
+import { fetchCurrentCompanyInfo, fetchUpdateCompany } from '../redux/reducers/current_company_info'
 import Loader from '../Shared/Atoms/Loader'
 import { colors, fonts } from "../styles/theme";
 
@@ -39,6 +39,30 @@ const ClosePage = styled(FontAwesome)`
   }
 `;
 
+const CompanyInfo = styled.div`
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin: 40px 20px;
+`
+const CompanyField = styled.div`
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+`
+const CompanyInfoTitle = styled.div`
+  width: 110px;
+  display: inline-block;
+`
+const Input = styled.input`
+  margin-left: 20px;
+  margin-right: 20px;
+  border: none;
+  border-bottom: 1px solid black;
+  text-align: right;
+  padding: 10px;
+`
+
 const ChartsData = styled.div`
   display: flex;
   justify-content: space-around;
@@ -59,58 +83,96 @@ const CompanyName = styled.h2``;
 
 class ChangeCompanyPage extends Component {
 
-    state = {
-        company: null
-    }
+    state = null
 
     componentWillReceiveProps(props){
         if(props.company){
-            this.setState({company: {...props.company}})
+            this.setState({...props.company})
         }
     }
 
-  componentDidMount() {
+    componentDidMount() {
+        const companyId = +this.props.match.params.id;
+        this.props.fetchCurrentCompanyInfo(companyId)
+    }
+
+
+    handleChangeStat = (value, statField) => {
+        const field = statField.split('.')
+        if (field.length === 1){
+            this.setState({
+                [field[0]]:value
+            })
+        }
+        if (field.length === 2){
+            this.setState({
+                [field[0]]:{
+                    ...this.state[field[0]],
+                    [field[1]]: {
+                        ...this.state[field[0]][field[1]],
+                        value
+                    }
+                }
+            })
+        }
+    }
+
+  handleUpdate = async () => {
+    await this.props.fetchUpdateCompany(this.state.id, this.state)
     const companyId = +this.props.match.params.id;
-    this.props.fetchCurrentCompanyInfo(companyId)
+        this.props.fetchCurrentCompanyInfo(companyId)
   }
 
   render() {
-    const { isLoading, error, company} = this.props
-    console.log('company', this.state.company)
+    const { isLoading, error, company} = this.props    
     if(isLoading) 
       return <Loader />;
     if (error) 
       return <div>Error: {error.message}</div>
-    if (company) {
+    if (this.state) {
+      const infoKeysData = Object.keys(this.state.infoPageData)
       return (
         <InfoPage>
-            <CloseContainer to={`/`}>
+            <CloseContainer to={`/dashboard`}>
                 <ClosePage name="times" />
             </CloseContainer>
-            <CompanyLogo logo={company.logo} />
-            <div>
-                <span>Название компании: </span>
-                <input type='text' value={company.name}/>
-            </div>
-            <div>
-                <span>Вес в индексе RTS, %: </span>
-                <input type='text' value={company.weight}/>
-            </div>
-            <div>
-                <span>Цена за акцию, р: </span>
-                <input type='text' value={company.price}/>
-            </div>
-            <div>
-                {company.infoPageData.map((statField, key) => {
-                     return (
-                     <div key={key}>
-                        <span>{statField.title}</span>
-                        <input type='text' value={statField.value}/>
-                    </div>)  
+            <CompanyLogo logo={this.state.logo} />
+            <CompanyInfo>
+                <CompanyField>
+                    <CompanyInfoTitle>Название компании: </CompanyInfoTitle>
+                    <Input 
+                        value={this.state.name} 
+                        onChange={event => this.handleChangeStat(event.target.value, "name")}
+                    />
+                </CompanyField>
+                <CompanyField>
+                    <CompanyInfoTitle>Вес в индексе RTS, %: </CompanyInfoTitle>
+                    <Input 
+                     value={this.state.weight}
+                     onChange={event => this.handleChangeStat(event.target.value, "weight")} 
+                    />
+                </CompanyField>
+                <CompanyField>
+                    <CompanyInfoTitle>Цена за акцию, р: </CompanyInfoTitle>
+                    <Input 
+                     value={this.state.price}
+                     onChange={event => this.handleChangeStat(event.target.value, "price")}
+                    />
+                </CompanyField>
+                {infoKeysData.map((statField, key) => {
+                    return (
+                    <CompanyField key={key}>
+                        <CompanyInfoTitle>{this.state.infoPageData[statField].title}: </CompanyInfoTitle>
+                        <Input
+                         value={this.state.infoPageData[statField].value}
+                         onChange={event => 
+                            this.handleChangeStat(event.target.value, `infoPageData.${statField}`)}
+                        />
+                    </CompanyField>)  
                 })}
-            </div>
-            <ChartsData>
-                {company.chartStats.map((chartStatField, key) => {
+            </CompanyInfo>
+            {/* <ChartsData>
+                {this.state.chartStats.map((chartStatField, key) => {
                      return (
                      <div key={key}>
                         <span>{chartStatField.title}</span>
@@ -132,7 +194,8 @@ class ChangeCompanyPage extends Component {
                         </ChartStatFields>                        
                     </div>)  
                 })}
-            </ChartsData>
+            </ChartsData> */}
+            <input type="button" value="обновить" onClick={this.handleUpdate} />
         </InfoPage>
       );
     }
@@ -143,8 +206,8 @@ class ChangeCompanyPage extends Component {
 const mapStateToProps = (state) => ({
     isLoading: state.currentCompany.isLoading,
     company: state.currentCompany.company,
-    error: state.currentCompany.error 
+    error: state.currentCompany.error
 })
 
 
-export default connect(mapStateToProps, { fetchCurrentCompanyInfo })(ChangeCompanyPage);
+export default connect(mapStateToProps, { fetchCurrentCompanyInfo, fetchUpdateCompany })(ChangeCompanyPage);

@@ -58,7 +58,7 @@ module.exports = function (app, db) {
           'error': 'An error has occurred'
         });
       } else {
-        res.send(item);
+        res.send(id);
       }
     });
   });
