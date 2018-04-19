@@ -31,6 +31,8 @@ const CompanyLogoNameContainer = styled.div`
   margin-top: 20px;
 `;
 
+const CompanyName = styled.h2``;
+
 
 const ClosePage = styled(FontAwesome)`
   font-size: ${fonts.large};
@@ -41,7 +43,6 @@ const ClosePage = styled(FontAwesome)`
   }
 `;
 
-const CompanyName = styled.h2``;
 
 class CompanyInfoPage extends Component {
 

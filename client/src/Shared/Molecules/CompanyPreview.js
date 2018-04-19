@@ -19,7 +19,8 @@ const Company=styled.div`
     font-family: 'Alice', serif; 
 `
 const Name = styled.h2`
-    margin: 5px;
+    text-align: center;
+    margin: 0 15px;
 `
 const Weight = styled.div`
     color: ${colors.gray}

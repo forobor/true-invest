@@ -24,16 +24,18 @@ const ChartContainer = styled.div`
 
 class Chart extends Component {
   render() {
+    const labels = Object.keys(this.props.chartData)
+    const data = Object.values(this.props.chartData)
     return (
       <ChartContainer>
         <Line
           data={{
-            labels: [...this.props.labels],
+            labels: [...labels],
             datasets: [
               {
                 borderColor: colors.blue,
                 fill: false,
-                data: [...this.props.data]
+                data: [...data]
               }
             ]
           }}

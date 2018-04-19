@@ -7,10 +7,9 @@ import { connect } from 'react-redux';
 import CompanyLogo from '../Shared/Atoms/CompanyLogo'
 import { fetchCurrentCompanyInfo, fetchUpdateCompany } from '../redux/reducers/current_company_info'
 import Loader from '../Shared/Atoms/Loader'
-import { colors, fonts } from "../styles/theme";
+import { colors, fonts, media } from "../styles/theme";
 
 const InfoPage = styled.div`
-  height: 100%;
   background: ${colors.white};
   padding-top: 10px;
   font-family: "Alice", serif;
@@ -20,13 +19,6 @@ const InfoPage = styled.div`
 const CloseContainer = styled(Link)`
   position: absolute;
   right: 10px;
-`;
-
-const CompanyLogoNameContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 20px;
 `;
 
 
@@ -39,6 +31,15 @@ const ClosePage = styled(FontAwesome)`
   }
 `;
 
+const CompanyLogoNameContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+`;
+
+const CompanyName = styled.h2``;
+
 const CompanyInfo = styled.div`
   display: flex;
   justify-content: space-between;
@@ -49,9 +50,11 @@ const CompanyField = styled.div`
   margin-bottom: 10px;
   display: flex;
   align-items: center;
+  width: 350px;
 `
 const CompanyInfoTitle = styled.div`
   width: 110px;
+  font-weight: 600;
   display: inline-block;
 `
 const Input = styled.input`
@@ -67,19 +70,44 @@ const ChartsData = styled.div`
   display: flex;
   justify-content: space-around;
   flex-wrap: wrap;
-
 `
 
 const ChartStatFields = styled.div`
   display: flex;
 `
+const ChartTitle = styled.div`
+    font-weight: 600; 
+`
 
 const ChartInfo = styled.div`
   display: flex;
   flex-direction: column;
+  margin: 40px 20px;
+`
+const UpdateButton = styled.div`
+    height: 70px;
+    background: ${colors.blue_trans};
+    border-radius: 10% 10% 0 0;
+    font-size: ${fonts.xmed}
+    box-shadow: 0 0 10px rgba(0,0,0,0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Forum';
+    transition: all .2s ease-in-out;
+    cursor: pointer;
+    padding: 0 5px;
+    &:hover,
+    &:focus {
+        font-size: ${fonts.large};
+    }
+    ${media.phone`
+        bottom: 10px;
+        right: 10px;
+    `};
 `
 
-const CompanyName = styled.h2``;
+
 
 class ChangeCompanyPage extends Component {
 
@@ -115,6 +143,22 @@ class ChangeCompanyPage extends Component {
                 }
             })
         }
+        if (field.length === 4){
+            this.setState({
+                [field[0]]: {
+                    ...this.state[field[0]],
+                    [field[1]]: {
+                        ...this.state[field[0]][field[1]],
+                        [field[2]]: {
+                            ...this.state[field[0]][field[1]][field[2]],
+                            [field[3]]:value
+                        }
+                    }
+                }
+            })
+        }
+        console.log('filed', this.state)
+        
     }
 
   handleUpdate = async () => {
@@ -124,20 +168,33 @@ class ChangeCompanyPage extends Component {
   }
 
   render() {
-    const { isLoading, error, company} = this.props    
+    const { isLoading, error} = this.props    
     if(isLoading) 
-      return <Loader />;
+      return <InfoPage><Loader /></InfoPage>;
     if (error) 
       return <div>Error: {error.message}</div>
     if (this.state) {
-      const infoKeysData = Object.keys(this.state.infoPageData)
+      const infoDataKeys = Object.keys(this.state.infoPageData)
+      const chartDataKeys = Object.keys(this.state.chartStats)
       return (
         <InfoPage>
             <CloseContainer to={`/dashboard`}>
                 <ClosePage name="times" />
             </CloseContainer>
-            <CompanyLogo logo={this.state.logo} />
+            <CompanyLogoNameContainer>
+                <CompanyLogo logo={this.state.logo} />
+                <CompanyName>
+                    {this.state.name}
+                </CompanyName>
+            </CompanyLogoNameContainer>
             <CompanyInfo>
+                <CompanyField>
+                    <CompanyInfoTitle>Логотип: </CompanyInfoTitle>
+                    <Input 
+                        value={this.state.logo} 
+                        onChange={event => this.handleChangeStat(event.target.value, "logo")}
+                    />
+                </CompanyField>                
                 <CompanyField>
                     <CompanyInfoTitle>Название компании: </CompanyInfoTitle>
                     <Input 
@@ -159,7 +216,7 @@ class ChangeCompanyPage extends Component {
                      onChange={event => this.handleChangeStat(event.target.value, "price")}
                     />
                 </CompanyField>
-                {infoKeysData.map((statField, key) => {
+                {infoDataKeys.map((statField, key) => {
                     return (
                     <CompanyField key={key}>
                         <CompanyInfoTitle>{this.state.infoPageData[statField].title}: </CompanyInfoTitle>
@@ -171,31 +228,34 @@ class ChangeCompanyPage extends Component {
                     </CompanyField>)  
                 })}
             </CompanyInfo>
-            {/* <ChartsData>
-                {this.state.chartStats.map((chartStatField, key) => {
+            <ChartsData>
+                {chartDataKeys.map((chartStatField) => {
                      return (
-                     <div key={key}>
-                        <span>{chartStatField.title}</span>
+                     <div key={chartStatField}>
                         <ChartStatFields>
                             <ChartInfo>
-                                {chartStatField.chartData.labels.map(yearLabel => {
+                            <ChartTitle>{this.state.chartStats[chartStatField].title}</ChartTitle>                                
+                                {Object.entries(this.state.chartStats[chartStatField].chartData).map(chartProp => {
                                     return (
-                                        <div key={yearLabel}  >{yearLabel} </div>
-                                    )
-                                })}
-                            </ChartInfo>
-                            <ChartInfo>
-                                {chartStatField.chartData.data.map(yearStat => {
-                                    return (
-                                         <input key={yearStat} type='text' value={yearStat} />
+                                        <div key={chartProp[0]}>
+                                        <span>{chartProp[0]}</span> 
+                                        <Input
+                                            value={chartProp[1]}
+                                            onChange={event => 
+                                            this.handleChangeStat(
+                                                event.target.value, 
+                                                `chartStats.${chartStatField}.chartData.${chartProp[0]}`
+                                            )}
+                                        />
+                                       </div>
                                     )
                                 })}
                             </ChartInfo>
                         </ChartStatFields>                        
                     </div>)  
                 })}
-            </ChartsData> */}
-            <input type="button" value="обновить" onClick={this.handleUpdate} />
+            </ChartsData>
+            <UpdateButton onClick={this.handleUpdate}>Обновить</UpdateButton>
         </InfoPage>
       );
     }

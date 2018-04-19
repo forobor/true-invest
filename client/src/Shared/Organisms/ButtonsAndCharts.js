@@ -49,33 +49,31 @@ const ChartTitle = styled.h2`
 
 class ButtonsAndCharts extends Component {
   state = {
-    currentChart: this.props.stats[0]
+    currentChart: this.props.stats.stockPrice
   };
 
   handleStatButtonClick = target => {
-    const dataField = this.props.stats.find(
-      statField => statField.name === target.name
-    );
-    this.setState({ currentChart: dataField });
+    this.setState({ currentChart: this.props.stats[target.name] });
   };
 
   render() {
-    const { stats } = this.props;
+    const { stats } = this.props
+    const keys = Object.keys(this.props.stats)
     return (
       <Container>
         <StatButtons>
-          {stats.map(statField => (
+          {keys.map(statField => (
             <StatButton
-              key={statField.name}
-              name={statField.name}
-              data={statField.data}
+              key={statField}
+              name={statField}
+              data={stats[statField].data}
               onClick={event =>
                 this.handleStatButtonClick(
                   event.target
                 )
               }
             >
-              {statField.title}
+              {stats[statField].title}
             </StatButton>
           ))}
         </StatButtons>
@@ -85,7 +83,7 @@ class ButtonsAndCharts extends Component {
           </ChartTitle>
           <Chart
             legend={this.state.currentChart.title}
-            {...this.state.currentChart.chartData}
+            chartData={this.state.currentChart.chartData}
           />
         </ChartContainer>
       </Container>
