@@ -8,7 +8,7 @@ const List = styled.div`
     flex-wrap: wrap;
 `
 
-class CompanyList extends Component {
+class CompaniesList extends Component {
     render() {
         const {companies, isEditable, onDelete} = this.props
         return (
@@ -33,4 +33,4 @@ class CompanyList extends Component {
         )
     }
 }
-export default CompanyList;
+export default CompaniesList;

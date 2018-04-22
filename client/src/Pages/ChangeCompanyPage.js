@@ -85,6 +85,9 @@ const ChartInfo = styled.div`
   margin: 40px 20px;
 `
 const UpdateButton = styled.div`
+    position: fixed;
+    bottom: 0;
+    right: 5px;
     height: 70px;
     background: ${colors.blue_trans};
     border-radius: 10% 10% 0 0;
@@ -93,7 +96,7 @@ const UpdateButton = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    font-family: 'Forum';
+    font-family: 'Alice', serif; 
     transition: all .2s ease-in-out;
     cursor: pointer;
     padding: 0 5px;

@@ -9,10 +9,11 @@ import { colors } from '../../styles/theme'
 const Company=styled.div`
     width: 250px;
     height: 250px;
+    padding: 10px 0;
     background-color: ${colors.white}
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
     margin: 12px;
     border-radius: 8px;
@@ -24,16 +25,14 @@ const Name = styled.h2`
 `
 const Weight = styled.div`
     color: ${colors.gray}
-    
 `
-
 const Price = styled.div`
     margin: 4px;
 `
 
 class CompanyPreview extends Component {
     render() {
-        const {id, logo, name, weight, price, isEditable, onDelete } = this.props
+        const { id, logo, name, weight, price, isEditable, onDelete } = this.props
         return(
             <div>
                 <Company>

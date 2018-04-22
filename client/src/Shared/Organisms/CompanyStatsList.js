@@ -24,8 +24,7 @@ class CompanyStatsList extends Component {
                     infoKeys.map((statField, key) => (
                         <CompanyStatField 
                             key={key} 
-                            title={infoPageData[statField].title} 
-                            value={infoPageData[statField].value} 
+                            {...infoPageData[statField]} 
                         /> 
                     ))
                 }
