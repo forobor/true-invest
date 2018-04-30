@@ -159,9 +159,7 @@ class ChangeCompanyPage extends Component {
                     }
                 }
             })
-        }
-        console.log('filed', this.state)
-        
+        }        
     }
 
   handleUpdate = async () => {

@@ -62,7 +62,7 @@ class CompanyStatField extends Component {
     const { title, value, description  } = this.props;
     return (
       <StatFieldContainer>
-        {description && <Description title={description} className="far fa-question-circle"/>}
+        {description && <Description title={description} className="far fa-question-circle" name="" />}
         <StatTitle >{title}</StatTitle>
         <StatValue>{value}</StatValue>
       </StatFieldContainer>

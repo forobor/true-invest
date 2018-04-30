@@ -60,7 +60,6 @@ export default (state = initialState, action) => {
                 isLoading: action.isLoading
             }
         case COMPANY_INFO_SUCCESS:
-            console.log('succ', state, action)
             return {
                 ...state,
                 company: action.company
@@ -72,7 +71,6 @@ export default (state = initialState, action) => {
             }
 
         case COMPANY_INFO_CLEAN:
-            console.log('sad', state, action)
             return initialState;
 
         case COMPANY_UPDATE_LOADING:
