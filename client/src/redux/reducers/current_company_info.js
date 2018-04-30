@@ -4,6 +4,8 @@ const COMPANY_INFO_LOADING = 'COMPANY_INFO_LOADING'
 const COMPANY_INFO_SUCCESS = 'COMPANY_INFO_SUCCESS'
 const COMPANY_INFO_FAIL = 'COMPANY_INFO_FAIL'
 
+const COMPANY_INFO_CLEAN = 'COMPANY_INFO_CLEAN'
+
 const COMPANY_UPDATE_LOADING = 'COMPANY_UPDATE_LOADING'
 const COMPANY_UPDATE_SUCCESS = 'COMPANY_UPDATE_SUCCESS'
 const COMPANY_UPDATE_FAIL = 'COMPANY_UPDATE_FAIL'
@@ -20,6 +22,11 @@ const companyInfoFail = error => ({
     type: COMPANY_INFO_FAIL,
     error: error
 })
+
+export const companyInfoClean = () => ({
+    type: COMPANY_INFO_CLEAN    
+})
+
 
 const companyUpdateLoading = bool => ({
     type: COMPANY_INFO_LOADING,
@@ -53,6 +60,7 @@ export default (state = initialState, action) => {
                 isLoading: action.isLoading
             }
         case COMPANY_INFO_SUCCESS:
+            console.log('succ', state, action)
             return {
                 ...state,
                 company: action.company
@@ -62,6 +70,10 @@ export default (state = initialState, action) => {
                 ...state,
                 error: action.error
             }
+
+        case COMPANY_INFO_CLEAN:
+            console.log('sad', state, action)
+            return initialState;
 
         case COMPANY_UPDATE_LOADING:
             return {

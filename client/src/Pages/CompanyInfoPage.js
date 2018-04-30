@@ -4,7 +4,7 @@ import FontAwesome from "react-fontawesome";
 import { Link } from "react-router-dom";
 import { connect } from 'react-redux';
 
-import { fetchCurrentCompanyInfo } from '../redux/reducers/current_company_info'
+import { fetchCurrentCompanyInfo, companyInfoClean } from '../redux/reducers/current_company_info'
 import Loader from '../Shared/Atoms/Loader'
 import CompanyLogo from "../Shared/Atoms/CompanyLogo";
 import CompanyStatsList from "../Shared/Organisms/CompanyStatsList";
@@ -50,6 +50,10 @@ class CompanyInfoPage extends Component {
     const companyId = +this.props.match.params.id;
     this.props.fetchCurrentCompanyInfo(companyId)
   }
+  
+  componentWillUnmount() {
+    this.props.companyInfoClean();
+  }
 
   render() {
     const { isLoading, error, company} = this.props
@@ -87,4 +91,4 @@ const mapStateToProps = (state) => ({
 })
 
 
-export default connect(mapStateToProps, { fetchCurrentCompanyInfo })(CompanyInfoPage);
+export default connect(mapStateToProps, { fetchCurrentCompanyInfo, companyInfoClean })(CompanyInfoPage);
