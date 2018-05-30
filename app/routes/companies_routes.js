@@ -1,3 +1,4 @@
+const admin = require('../../config/admin');
 module.exports = function (app, db) {
   app.get('/api/companies', (req, res) => {
     db.collection('companies').find().project({infoPageData: 0, chartStats: 0} ).toArray((err, result) => {
@@ -86,4 +87,16 @@ module.exports = function (app, db) {
       }
     });
   });
+
+  app.post('/api/admin', (req, res) => {
+    const authData = {
+      login: req.body.login,
+      password: req.body.password
+    }
+    if(authData.login === admin.login && authData.password === admin.password) {
+      res.send(true)
+    } else {
+      res.send(false)
+    }
+  })
 };
