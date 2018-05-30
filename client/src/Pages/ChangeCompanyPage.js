@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import styled from "styled-components";
 import FontAwesome from "react-fontawesome";
+import { Redirect } from 'react-router-dom';
 import { Link } from "react-router-dom";
 import { connect } from 'react-redux';
 
@@ -169,11 +170,14 @@ class ChangeCompanyPage extends Component {
   }
 
   render() {
-    const { isLoading, error} = this.props    
+    const { isLoading, error, isLogged} = this.props    
     if(isLoading) 
       return <InfoPage><Loader /></InfoPage>;
     if (error) 
       return <div>Error: {error.message}</div>
+    if (!isLogged) {
+        return <Redirect to="/dashboard/login"/>
+    }
     if (this.state) {
       const infoDataKeys = Object.keys(this.state.infoPageData)
       const chartDataKeys = Object.keys(this.state.chartStats)
@@ -267,7 +271,10 @@ class ChangeCompanyPage extends Component {
 const mapStateToProps = (state) => ({
     isLoading: state.currentCompany.isLoading,
     company: state.currentCompany.company,
-    error: state.currentCompany.error
+    error: state.currentCompany.error,
+
+    isLogged: state.adminAuth.isLogged
+    
 })
 
 

@@ -20,7 +20,7 @@ const companyInfoSuccess = company => ({
 })
 const companyInfoFail = error => ({
     type: COMPANY_INFO_FAIL,
-    error: error
+    error
 })
 
 export const companyInfoClean = () => ({

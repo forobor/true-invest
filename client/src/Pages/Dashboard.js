@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import styled from 'styled-components'
 import { Link } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import { fetchCompaniesPreview, deleteCompany } from '../redux/reducers/companies_preview';
@@ -69,12 +70,15 @@ class Dashboard extends Component {
 
 
   render() {
-    const { isLoading, error, companies, isDeleteLoading } = this.props;
+    const { isLoading, error, companies, isDeleteLoading, isLogged } = this.props;
     const { searchedCompanies } = this.state
     if(isLoading) 
       return <Loader />;
     if (error) 
       return <div>Error: {error}</div>
+    if (!isLogged) {
+        return <Redirect to="/dashboard/login"/>
+    }
     if(companies) {
       return (
         <div>
@@ -104,7 +108,9 @@ const mapStateToProps = (state) => ({
   companies: state.companies.companies,
   error: state.companies.error,
 
-  isDeleteLoading: state.companies.isDeleteLoading
+  isDeleteLoading: state.companies.isDeleteLoading,
+
+  isLogged: state.adminAuth.isLogged
 })
 
 export default connect(mapStateToProps, { fetchCompaniesPreview, deleteCompany })(Dashboard);

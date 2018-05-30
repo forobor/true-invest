@@ -45,7 +45,7 @@ const Description = styled(FontAwesome)`
   font-size: ${fonts.normal};
   position: absolute;
   right: 50px;
-  curson: pointer
+  curson: pointer;
   ${media.tablet`
     left: 0px;
     right: auto;        

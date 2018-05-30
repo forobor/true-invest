@@ -33,12 +33,14 @@ const StatButton = styled.button`
   font-family: "Alice", serif;
   width: 150px;
   text-align: center;
+  height: 70px;
   ${media.tablet`
         width: 150px;
-    `} ${media.phone`
+  `} 
+  ${media.phone`
     font-size: ${fonts.small};
-        width: 125px;
-    `};
+    width: 125px;
+  `};
 `;
 
 const ChartContainer = styled.div``;
