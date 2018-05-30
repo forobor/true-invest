@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
-import styled from 'styled-components'
+import styled from 'styled-components';
 
 
-import MainHeader from './Shared/Molecules/MainHeader'
-import MainPage from './Pages/MainPage'
-import Dashboard from './Pages/Dashboard'
-import CompanyInfoPage from './Pages/CompanyInfoPage'
-import ChangeCompanyPage from './Pages/ChangeCompanyPage'
+import MainHeader from './Shared/Molecules/MainHeader';
+import MainPage from './Pages/MainPage';
+import Dashboard from './Pages/Dashboard';
+import CompanyInfoPage from './Pages/CompanyInfoPage';
+import ChangeCompanyPage from './Pages/ChangeCompanyPage';
+import LoginPage from './Pages/LoginPage';
 import { Switch,  Route } from 'react-router-dom';
 
 
@@ -27,6 +28,7 @@ class App extends Component {
           <Route exact path='/' component={MainPage}/>
           <Route path='/company/:id' component={CompanyInfoPage}/>
           <Route exact path='/dashboard' component={Dashboard}/>
+          <Route exact path='/dashboard/login' component={LoginPage}/>          
           <Route path='/dashboard/company/:id' component={ChangeCompanyPage}/> 
         </Switch>
       </AppWrapper>
