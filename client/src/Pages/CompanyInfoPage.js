@@ -31,7 +31,9 @@ const CompanyLogoNameContainer = styled.div`
   margin-top: 20px;
 `;
 
-const CompanyName = styled.h2``;
+const CompanyName = styled.h2`
+  margin-left: 10px;
+`;
 
 
 const ClosePage = styled(FontAwesome)`
