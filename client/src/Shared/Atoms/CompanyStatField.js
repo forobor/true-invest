@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import styled from "styled-components";
 import FontAwesome from "react-fontawesome";
 
-import { fonts, media } from "../../styles/theme";
+import { fonts, media, colors } from "../../styles/theme";
 
 const StatFieldContainer = styled.div`
   display: flex;
@@ -41,20 +41,46 @@ const StatValue = styled.div`
   `};
 `;
 
+const BadgeDescription = styled.div`
+  display: none;
+  width: 200px;
+  position: absolute;
+  left: -25px;
+  background-color: ${colors.light_gray};
+  border-radius: 10px;
+  padding: 10px;
+  z-index: 30;
+  ${media.phone`
+      width: 120px;
+      font-size: ${fonts.small}
+  `};
+`
+
 const Description = styled(FontAwesome)`
   font-size: ${fonts.normal};
-  position: absolute;
+  position: relative;
   right: 50px;
   curson: pointer;
   ${media.tablet`
     left: 0px;
     right: auto;        
-  `} ${media.phone`
+  `}
+  ${media.phone`
+    font-size: ${fonts.small};
     left: 0px;
     right: auto;        
   `};
 `;
 
+const DescriptionContainer = styled.div`
+  cursor: pointer;
+  &:hover ${BadgeDescription} {
+    display: block;
+  }
+  &:active ${BadgeDescription} {
+    display: block;
+  }
+`
 
 
 class CompanyStatField extends Component {
@@ -62,7 +88,12 @@ class CompanyStatField extends Component {
     const { title, value, description  } = this.props;
     return (
       <StatFieldContainer>
-        {description && <Description title={description} className="far fa-question-circle" name="" />}
+        {description && 
+          <DescriptionContainer>
+            <Description className="far fa-question-circle" name=""/>
+            <BadgeDescription>{description}</BadgeDescription>
+          </DescriptionContainer>
+        }
         <StatTitle >{title}</StatTitle>
         <StatValue>{value}</StatValue>
       </StatFieldContainer>
