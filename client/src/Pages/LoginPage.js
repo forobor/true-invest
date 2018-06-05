@@ -5,7 +5,7 @@ import { Redirect } from 'react-router-dom';
 
 import Loader from '../Shared/Atoms/Loader';
 import { fetchAdminAuth } from '../redux/reducers/login_reducer'
-import { colors, fonts } from "../styles/theme";
+import { colors } from "../styles/theme";
 
 
 

@@ -41,7 +41,7 @@ const AddButton = styled.div`
 class Dashboard extends Component {
 
   state = {
-    searchedCompanies: null
+    searchedCompanies: this.props.companies
   };
 
   componentDidMount() {
@@ -55,7 +55,6 @@ class Dashboard extends Component {
   }
 
   handleSearch = value => {
-    console.log('das', this.state, this.props)
     this.setState({
       searchedCompanies: this.props.companies.filter(
         el =>
@@ -77,9 +76,9 @@ class Dashboard extends Component {
       return <Loader />;
     if (error) 
       return <div>Error: {error}</div>
-    // if (!isLogged) {
-    //     return <Redirect to="/dashboard/login"/>
-    // }
+    if (!isLogged) {
+        return <Redirect to="/dashboard/login"/>
+    }
     if(companies) {
       return (
         <div>
